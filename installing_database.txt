@@ -1,0 +1,22 @@
+For linux distributions run the following commands:
+
+- sudo apt-get install postgresql libpq-dev postgresql-client postgresql-client-common
+
+- sudo -i -u postgres
+
+- createuser _____ -P --interactive
+	(enter password, then:
+	 -superuser? n
+	  create datebase? y
+	  create more new roles? y)
+
+- createdb ____
+
+- exit
+
+- python3 -m pip install psycopg2-binary
+
+Then run:
+python3 initialize_database.py [database name] [user name] [password]
+python3 initialize_database2.py [database name] [user name] [password]
+python3 initialize_database3.py [database name] [user name] [password]

@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %} FMI Unibuc {% endblock %}
+
+{% block header %} <p class="titlupag"> Anunturi FMI </p>  {% endblock %}
+
+{% block body %}
+
+            <div class="well" style="margin-left:22%; margin-right:19%;">
+                <div class="container-narrow">
+                    <div class="span4">
+                        <a href="/news/" style="align">
+                            <div align="center">
+                                Aceasta aplicatie are ca scop gestionarea anunturilor facultatii de Matematica si Informatica.
+                                <br>
+                                Va rugam sa va logati.
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+{% endblock %}
+
+
+{% block script  %}
+<script>
+$(document).ready(function() {
+    $('#example').DataTable();
+} );
+</script>
+
+{% endblock %}

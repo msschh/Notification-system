@@ -1,0 +1,31 @@
+Pentru a adauga grupe:
+
+- sudo -i -u postgres
+
+- psql echipa25 (sau cum a numit fiecare bd)
+
+
+insert into GROUPS(group_id) values (131);
+insert into GROUPS(group_id) values (132);
+insert into GROUPS(group_id) values (133);
+insert into GROUPS(group_id) values (141);
+insert into GROUPS(group_id) values (142);
+insert into GROUPS(group_id) values (143);
+insert into GROUPS(group_id) values (231);
+insert into GROUPS(group_id) values (232);
+insert into GROUPS(group_id) values (233);
+insert into GROUPS(group_id) values (241);
+insert into GROUPS(group_id) values (242);
+insert into GROUPS(group_id) values (243);
+insert into GROUPS(group_id) values (111);
+insert into GROUPS(group_id) values (112);
+insert into GROUPS(group_id) values (113);
+insert into GROUPS(group_id) values (121);
+insert into GROUPS(group_id) values (122);
+insert into GROUPS(group_id) values (123);
+insert into GROUPS(group_id) values (211);
+insert into GROUPS(group_id) values (212);
+insert into GROUPS(group_id) values (213);
+insert into GROUPS(group_id) values (221);
+insert into GROUPS(group_id) values (222);
+insert into GROUPS(group_id) values (223);

@@ -1,0 +1,148 @@
+{% extends "layout.html" %}
+
+{% block title %} FMI Unibuc {% endblock %}
+
+{% block header %} <p class="titlupag"> Anunturi FMI </p> {% endblock %}
+
+{% block script %} 
+<script>
+    $(document).ready(function() {
+    	$('.textanunt').each(function() {
+    		var text = $(this).html().substr(0,265);
+    		if (text.length === 265) {
+    			text += "...";
+    		}
+    		$(this).html(text);
+    	} );
+
+    	
+    	$('.textanunt').each(function() {
+            var text = $(this).text();
+            $(this).empty();
+            $(this).append($.parseHTML(text));
+    	});
+    	
+	    $('#filtruNews').on("input", function() {
+	    	var textFiltru = $(this).val().toLowerCase();
+	    	$('.textanunt').each(function() {
+	    		var text = $(this).html().toLowerCase();
+	    		if (~text.indexOf(textFiltru)) {
+	    			$(this).parent().parent().show();
+	    		} else {
+	    			$(this).parent().parent().hide();
+	    		}
+	    	} );
+		});
+    } );
+</script>
+{% endblock %}
+{% block body %}
+
+<style>
+
+	.divblue {
+		border-style: solid;
+		border-width: 3px;
+		border-color: #758db2;
+		border-radius: 10px;
+		width: 70%;
+		margin-left: 15%;
+		margin-bottom: 15px;
+	}
+
+	.divblue:hover {
+		opacity: 0.6;
+	}
+
+	.divblue a:hover {
+		text-decoration: none;
+	}
+
+	.autor {
+		margin-left: 1%;
+		margin-right: 1%;
+		font-weight: 600;
+		font-size: 22px;
+		color: rgb(37, 84, 158);
+	}
+
+	.dataan {
+		margin-left: 1%;
+		margin-right: 1%;
+		font-weight: 400;
+		font-size: 18px;
+		color: rgb(41, 57, 81);
+	}
+
+	.textanunt::first-letter {
+	    font-size: 20px;
+	    font-weight: 400;
+	}
+
+	.textanunt {
+		margin-left: 1%;
+		margin-right: 1%;
+		font-weight: 350;
+		font-size: 16px;
+		color: rgb(41, 57, 81);
+	}
+
+	.divred {
+		border-style: solid;
+		border-width: 3px;
+		border-color: #758db2;
+		border-radius: 10px;
+		width: 70%;
+		margin-left: 15%;
+		margin-bottom: 15px;
+	}
+
+	.divred:hover {
+		opacity: 0.6;
+	}
+
+	.divred a:hover {
+		text-decoration: none;
+	}
+
+ </style>
+
+{% if current_user.is_admin == 1 or current_user.is_teacher == 1 %}
+    <a class="btn btn-primary" style="margin-left: 15%;" href="/news/add/">Adauga</a>
+{% endif %}
+
+<div style="float: right; margin-right: 15%; width: 30%;">
+	<input type="text" id="filtruNews" placeholder="Search" style="width: 100%;">
+</div>
+
+<br><br>
+
+{% for stire in news %}
+	{% if stire.activ %}
+	<div class="divblue">
+		<a href="/news/view/{{ stire.news_id }}/">
+	    	<p class="textanunt" style="margin-top: 5px;"><img src='/static/img/check1.png' height="24" style="margin-right: 5px;"/>{{ stire.text }}</p>
+
+			<div style="margin-left: 15%; margin-top: 10px;">
+			    <div style="text-align-last: right; color: #8c8c8c; margin-bottom: 5px; margin-right: 5px;">
+			        Postat de <b>{{ stire.author }}</b> la data <b>{{ stire.create_date }}</b>, valabil intre <b>{{ stire.start_date }}</b> - <b>{{ stire.end_date }}</b>
+			    </div>
+			</div>
+		</a>
+	</div>
+	{% else %}
+	<div class="divred">
+		<a href="/news/view/{{ stire.news_id }}/">
+	    	<p class="textanunt" style="margin-top: 5px;"><img src='/static/img/cross2.png' height="24" style="margin-right: 5px;"/>{{ stire.text }}</p>
+
+			<div style="margin-left: 15%; margin-top: 10px;">
+			    <div style="text-align-last: right; color: #8c8c8c; margin-bottom: 5px; margin-right: 5px;">
+			        Postat de <b>{{ stire.author }}</b> la data <b>{{ stire.create_date }}</b>, valabil intre <b>{{ stire.start_date }}</b> - <b>{{ stire.end_date }}</b>
+			    </div>
+			</div>
+		</a>
+	</div>
+	{% endif %}
+{% endfor %}
+
+{% endblock %}

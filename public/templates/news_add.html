@@ -1,0 +1,98 @@
+{% extends "layout.html" %}
+
+{% block title %} FMI Unibuc {% endblock %}
+
+{% block header %} <p class="titlupag"> Anunturi FMI </p> {% endblock %}
+
+{% block body %}
+
+<br>
+
+<form action="/news/create/" method="post" onsubmit="return validate()">
+
+    <table width="100%" style="border: none !important; border-collapse:separate; border-spacing:0 10px;">
+        <tr>
+            <td width="15%"><p style="padding-top: 13px;">Data de inceput</p></td>
+            <td><input type="text" id="datepicker1" class="form-control" name="start_date" /></td>
+        </tr>
+        <tr>
+            <td><p style="padding-top: 13px;">Data de final</p></td>
+            <td><input type="text" id="datepicker2" class="form-control" name="end_date" /></td>
+        </tr>
+        <tr>
+            <td><p style="margin-top: -48px;">Text</p></td>
+            <td>
+              <textarea class="form-control" id="text" name="text" rows="5"></textarea>
+            </td>
+        </tr>
+    </table>
+    <ul id="alert" style="color: red; list-style-type: disc; margin:4px"></ul>
+
+    <br>
+    <p>Alegeti grupele vizate:</p>
+    <ul class="treeview">
+      {% for grupa in grupe %}
+      <li>
+          <input type="checkbox">
+          <label class="custom-unchecked" onclick="expand(this);">{{ grupa['specializare'] }}</label>
+          <ul style="display: none;">
+              {% for an in grupa['ani'] %}
+              <li>
+                  <input type="checkbox">
+                  <label class="custom-unchecked" onclick="expand(this);">An {{ an['an'] }}</label>
+                  <ul style="display: none;">
+                    {% for serie in an['serii'] %}
+                    <li>
+                        <input type="checkbox">
+                        <label class="custom-unchecked" onclick="expand(this);">Seria {{ serie['seria'] }}</label>
+                        <ul style="display: none;">
+                          {% for grupa in serie['grupe'] %}
+                          <li>
+                              <input type="checkbox" name="grupe" value="{{ grupa }}">
+                              <label class="custom-unchecked">Grupa {{ grupa }}</label>
+                          </li>
+                          {% endfor %}
+                        </ul>
+                    </li>
+                    {% endfor %}
+                  </ul>
+              </li>
+              {% endfor %}
+          </ul>
+      </li>
+      {% endfor %}
+    </ul>
+
+    <br><br>
+    
+    <input class="btn btn-primary" id="submit" type="submit" value="Adauga" />
+</form>
+
+{% endblock %}
+
+
+{% block css %}
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+{% endblock %}
+
+
+{% block script  %}
+  <script src="/static/js/validator.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="/static/js/checkboxTreeView.js"></script>
+  <script src="/static/js/checkboxTreeViewColapse.js"></script>
+  <script>
+  $( function() {
+	      $( "#datepicker1" ).datepicker();
+	        } );
+  $( function() {
+        $( "#datepicker2" ).datepicker();
+          } );
+  </script>
+  <link rel="stylesheet" href="/static/css/checkboxTreeView.css"></link>
+{% endblock %}
+
+

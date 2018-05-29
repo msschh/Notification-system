@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block title %} FMI Unibuc {% endblock %}
+
+{% block header %} <p class="titlupag"> Anunturi FMI </p> {% endblock %}
+
+{% block body %}
+
+<br>
+
+<form action="/news/update/" method="post"  onsubmit="return validate()">
+    <input type="hidden" class="form-control" name="news_id" value="{{ news.news_id }}"/>
+
+    <table width="100%" style="border: none !important; border-collapse:separate; border-spacing:0 10px;">
+        <tr>
+            <td width="15%"><p style="padding-top: 13px;">Data de inceput</p></td>
+            <td><input type="text" id="datepicker1" class="form-control" name="start_date" value="{{ news.start_date }}" /></td>
+        </tr>
+        <tr>
+            <td><p style="padding-top: 13px;">Data de final</p></td>
+            <td><input type="text" id="datepicker2" class="form-control" name="end_date" value="{{ news.end_date }}" /></td>
+        </tr>
+        <tr>
+            <td><p style="padding-top: 13px;">Data crearii</p></td>
+            <td><input type="text" class="form-control" name="create_date" value="{{ news.create_date }}" disabled /></td>
+        </tr>
+        <tr>
+            <td><p style="margin-top: -48px;">Text</p></td>
+            <td>
+              <textarea class="form-control" id="text" name="text" rows="5">{{ news.text }}</textarea>
+            </td>
+        </tr>
+    </table>
+    <ul id="alert" style="color: red; list-style-type: disc; margin:4px"></ul>
+
+    <br><br>
+
+    <input class="btn btn-primary" id="submit" type="submit" value="Modifica" />
+</form>
+
+{% endblock %}
+
+
+{% block css %}
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+{% endblock %}
+
+
+{% block script  %}
+  <script src="/static/js/validator.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="/static/js/checkboxTreeView.js"></script>
+  <script src="/static/js/checkboxTreeViewColapse.js"></script>
+  <script>
+  $( function() {
+          $( "#datepicker1" ).datepicker();
+            } );
+  $( function() {
+        $( "#datepicker2" ).datepicker();
+          } );
+  </script>
+  <link rel="stylesheet" href="/static/css/checkboxTreeView.css"></link>
+{% endblock %}

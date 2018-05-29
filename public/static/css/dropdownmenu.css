@@ -1,0 +1,26 @@
+#navPanel {
+    max-width:300px;
+    }
+    
+.panel-title > a {
+    color: inherit;
+    display:block;
+    text-decoration:none;
+} 
+
+.panel-body {
+    padding: 0px!important;
+}
+.list-group {
+    padding-left: 0!important;
+    margin-bottom: 0px!important;
+}
+
+.glyphicon-plus:before {
+   content: "\2212" !important;
+}
+
+
+.collapsed .glyphicon-plus:before {
+    content: "\2b" !important;
+}
